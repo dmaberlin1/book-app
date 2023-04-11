@@ -1,5 +1,240 @@
 'use strict'
 
+
+
+// *****************************ТАЙМЕРЫ**************************
+// *****************************ТАЙМЕРЫ**************************
+// *****************************ТАЙМЕРЫ**************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ******************Даты и время**********************
+//
+// const now = new Date();
+// console.log(now)
+// console.log(new Date('02-01-2023'))
+// console.log(new Date('02/01/2023'))
+// console.log(new Date('2023/01/02'))
+// console.log(new Date('10 jan 2023'))
+// console.log(new Date('dec 22 2022 20:40:03'))
+// console.log(new Date(2024, 11, 31, 10, 5, 10))
+// console.log(new Date(2024, 12, 10 + 100));
+// console.log(new Date(0))
+//
+// //так я могу получить дату от начала отсчёта Unix, от первого января 1970 года,
+// // или относительно текущего времени
+// console.log(new Date(1 * 24 * 60 * 60 * 1000))
+// console.log(now)
+// console.log(new Date(Date.now()))
+//
+// console.log(now.getFullYear())
+//
+// //getDate день месяца
+// console.log(now.getDate())
+//
+// //getDay день недели
+// console.log(now.getDay())
+// console.log(now.getMonth())
+// console.log(now.getHours())
+// console.log(now.getMinutes())
+// //getTime -время в милисекундах от начала отсчёта Unix, первого января 1970 года
+// console.log(now.getTime())
+//
+// console.log(new Date(now.setFullYear(2024)))
+// console.log(new Date(now.setMonth(6)))
+//
+
+
+// ***операции с датами
+//
+// const date1=new Date(2024,10,15)
+// const date2=new Date(2024,11,17)
+// console.log(Number(date1))
+// console.log(+date2)
+//
+// function getDaysBetweenDates(dateFirst,dateSecond) {
+//     return (date2-date1)/(1000*60*60*24)
+// }
+//
+// console.log(getDaysBetweenDates(date1,date2))
+
+
+// ***********сравнение дат ***********
+
+// const first=new Date(2024,10,4)
+// const second=new Date(2024,10,4)
+//
+// //сравнение очень простое, потому что под собой он сравнивает тайм стемпы
+// console.log(first<second)
+//
+// // сравнение не работает- данные представлены в виде обьектов, для проверки  нужны таймстемпы
+// console.log(first===second)
+//
+// //в числовом представлении timeстеймпы совпадают
+// console.log(first.getTime()===second.getTime())
+//
+// //или представить в числовом виде
+// console.log(Number(first)===Number(second))
+//
+//
+// const now=new Date()
+// console.log(now.getMonth()+1)
+//
+//
+// const user1={
+//     name:'Johny',
+//     birthday:'04/11/2022'
+// }
+//
+// console.log(new Date(user1.birthday).getDate() === now.getDate())
+//
+// function isBirthday(user) {
+//     const birthdayDate=new Date(user.birthday)
+//     const now=new Date()
+//      const birthday= (birthdayDate.getDate() ===now.getDate())
+//         &&(birthdayDate.getMonth() === now.getMonth())
+//     return birthday
+// }
+//
+// console.log(isBirthday(user1))
+//
+
+// ************интернационализация дат****************
+
+//
+// const date=new Date()
+// console.log(date)
+// console.log(new Intl.DateTimeFormat('ru-RU').format(date))
+// const options1={
+//     hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric'
+// }
+// const options2={
+//     hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric',
+//     year:'numeric',
+//     month: 'short',
+//     weekday: 'long'
+// }
+// const options3={
+//     hour:'numeric',
+//     minute:'numeric',
+//     month:'short',
+//     weekday:'short',
+//     year:'2-digit'
+// }
+// console.log(new Intl.DateTimeFormat('ru-RU',options1).format(date))
+// console.log(new Intl.DateTimeFormat('en-US',options1).format(date))
+// console.log(new Intl.DateTimeFormat('en-US',options2).format(date))
+// console.log(new Intl.DateTimeFormat('en-US',options3).format(date))
+//
+// console.log(navigator.language)
+// console.log(navigator.languages)
+// console.log(new Intl.DateTimeFormat(navigator.language,options3).format(date))
+//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // **********************Расчеты и Math***********************************
 //
 // console.log(Math.cbrt(27))
@@ -52,55 +287,68 @@
 
 // ************** Интернационализация******
 
-const options1= {
-    style: 'currency',
-    currency: 'UAH',
-}
-const options01= {
-    style: 'currency',
-    currency: 'UAH',
-    useGrouping:false
-}
-const options2={
-    style:'currency',
-    currency:'USD',
-    // useGrouping:false
-
-}
-const options3={
-    style:'decimal',
-}
-const options4={
-    style:'percent',
-
-}
-const options5={
-    style:'unit',
-    unit:'celsius'
-
-}
-
-console.log(new Intl.NumberFormat('ru-RU',options01).format(250000))
-console.log(new Intl.NumberFormat('ru-RU',options1).format(250000))
-console.log(new Intl.NumberFormat('en-US',options1).format(250000))
-console.log(new Intl.NumberFormat('en-US',options2).format(250000))
-console.log(new Intl.NumberFormat('ru-RU',options2).format(250000))
-
-console.log(new Intl.NumberFormat('ru-RU',options3).format(2500000))
-console.log(new Intl.NumberFormat('ru-RU',options4).format(0.41))
-console.log(new Intl.NumberFormat('ru-RU',options5).format(25))
-
-
-
-end in 9 less
-
-
-
-
-
-
-
-
+// const options1 = {
+//     style: 'currency',
+//     currency: 'UAH',
+// }
+// const options01 = {
+//     style: 'currency',
+//     currency: 'UAH',
+//     useGrouping: false
+// }
+// const options2 = {
+//     style: 'currency',
+//     currency: 'USD',
+//     // useGrouping:false
+//
+// }
+// const options3 = {
+//     style: 'decimal',
+// }
+// const options4 = {
+//     style: 'percent',
+//
+// }
+// const options5 = {
+//     style: 'unit',
+//     unit: 'celsius'
+//
+// }
+//
+// console.log(new Intl.NumberFormat('ru-RU', options01).format(250000))
+// console.log(new Intl.NumberFormat('ru-RU', options1).format(250000))
+// console.log(new Intl.NumberFormat('en-US', options1).format(250000))
+// console.log(new Intl.NumberFormat('en-US', options2).format(250000))
+// console.log(new Intl.NumberFormat('ru-RU', options2).format(250000))
+//
+// console.log(new Intl.NumberFormat('ru-RU', options3).format(2500000))
+// console.log(new Intl.NumberFormat('ru-RU', options4).format(0.41))
+// console.log(new Intl.NumberFormat('ru-RU', options5).format(25))
+//
+//
+// function convert(sum, initialCurrency, convertCurrency) {
+//     const allCurrencies = [
+//         {name: 'USD', mult: 1},
+//         {name: 'UAH', mult: 1 / 40},
+//         {name: 'EUR', mult: 1.1},
+//     ];
+//     const initial=allCurrencies.find(c=>c.name===initialCurrency)
+//
+//     if(!initial){
+//         return null;
+//     }
+//
+//     const convert=allCurrencies.find(c=>c.name===convertCurrency)
+//
+//     if(!convert){
+//         return null;
+//     }
+//     return new Intl.NumberFormat('ru-Ru',{style:'currency'})
+//
+//     return sum* initial.mult/convert.mult;
+//
+// }
+//
 
 // console.log(Number.parseInt('100lolito',10))
 // // можно обратиться и без прототипа Number, лучше с ним , более явно будет указано
@@ -109,22 +357,6 @@ end in 9 less
 // console.log(Number.isInteger(100.1))
 // //isFinite хороший способ проверки
 //
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // ************** Set & Map ***** Сеты и Мэпы*****
@@ -144,8 +376,6 @@ end in 9 less
 // }
 // //разобрали sets в обычный массив
 // console.log([...setFlights])
-
-
 
 
 // Map это коллекция, пар ключ\значение, может использовать любой тип данных в качестве ключа,
