@@ -10,10 +10,10 @@ console.log(LoadAppTime)
 
 //прототипное наследование
 //каждый раз при создании Массива, мы просто линкуемся к прототипу со всеми методами
-const a=[1];
-
-//dir выповодит всю инфу об обьекте, показал мне обьект, с отсылкой к прототипу Массива
-console.dir(a)
+// const a=[1];
+//
+// //dir выповодит всю инфу об обьекте, показал мне обьект, с отсылкой к прототипу Массива
+// console.dir(a)
 
 
 //********************** немного древний метод***************
@@ -79,13 +79,48 @@ console.dir(a)
 // ************************** Корзина Товаров*************************
 
 
+const Cart=function () {
+ this.products=[];
+}
+
+const product1={id:1,name:'Tomato',count:15}
+const product2={id:2,name:'Potato',count:2}
+
+Cart.prototype.addProduct=function (product) {
+    if(this.products.find(prod=>prod.id===product.id)) return
+
+    this.products.push(product)
+}
+
+Cart.prototype.increaseAmount=function (id) {
+    this.products=this.products.map(product=>{
+        if(product.id==id){
+            product.count++
+            return product
+        }
+        return product
+    })
+}
 
 
+Cart.prototype.decreaseAmount=function (id) {
+    this.products=this.products.map(product=>{
+        if(product.id==id){
+            product.count--
+            return product
+        }
+        return product
+    }).filter(product=>product.count>0)
+}
 
-
-
-
-
+const cart=new Cart()
+cart.addProduct(product1)
+cart.addProduct(product2)
+console.log(cart)
+cart.decreaseAmount(product2.id)
+cart.decreaseAmount(product2.id)
+cart.decreaseAmount(product1.id)
+console.log(cart)
 
 
 
