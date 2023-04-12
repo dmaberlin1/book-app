@@ -8,6 +8,86 @@ console.log(LoadAppTime)
 // *********Реализация ООП в JS***************************
 
 
+//прототипное наследование
+//каждый раз при создании Массива, мы просто линкуемся к прототипу со всеми методами
+const a=[1];
+
+//dir выповодит всю инфу об обьекте, показал мне обьект, с отсылкой к прототипу Массива
+console.dir(a)
+
+
+//********************** немного древний метод***************
+// ****создания через нью фунцкию, в современной js  используется не часто,
+// ****в большинстве мы видим использование es классов
+// const User=function (email,password) {
+//     this.email=email
+//     this.password=password
+// }
+//
+// const user1=new User('mail1@gmail.com','123123');
+// const user2=new User('mail2@gmail.com')
+// console.log(user1.email)
+// console.log(user2.email)
+// console.log(user2 instanceof User)
+
+// Создаёться пустой обьект
+// Вызывается User функция
+// // this = пустому обьекту
+// обьект связывается с prototype
+// возвращается обьект
+
+
+// ***********************Prototype*************
+//
+//
+// const Book=function (title,author) {
+//     this.author=author;
+//     this.title=title;
+//     this.isRead=false;
+// }
+//
+// Book.prototype.read=function () {
+//     this.isRead=true;
+// }
+// Book.prototype.cover='Paper'
+//
+//
+// const lordOfTheRings=new Book('Lord of the rings ','J.J.R Tolkien')
+// console.log(lordOfTheRings)
+// lordOfTheRings.read()
+// console.log(lordOfTheRings)
+// console.log(lordOfTheRings.cover)
+// // lordOfTheRings.cover='E-book'
+// console.log(lordOfTheRings.cover)
+//
+// //провереяем созданные методы, и наследованные от прототипа с помощью hasOwnProperty
+// //hasOwnProperty  поможет разделить какое свойство есть у самого обьекта, а какое у прототипа, если мы изменили метод после создания, будет тру, если оставили от прототипа-false
+//
+// console.log(lordOfTheRings.hasOwnProperty('cover'))
+// console.log(lordOfTheRings.hasOwnProperty('author'))
+
+// console.log(lordOfTheRings.__proto__)
+// //сравнили прото класса и прототипа
+// console.log(lordOfTheRings.__proto__===Book.prototype)
+//
+// //тоесть класс Book является прототипом для lordOfTheRings
+// console.log(Book.prototype.isPrototypeOf(lordOfTheRings))
+//
+//
+
+
+// ************************** Корзина Товаров*************************
+
+
+
+
+
+
+
+
+
+
+
 
 
 
