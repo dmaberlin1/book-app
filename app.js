@@ -1,4 +1,20 @@
 'use strict'
+const LoadAppTime=Number(performance.now().toFixed(1))
+console.log(LoadAppTime)
+// *****************************ООП**********************************
+// *****************************ООП**********************************
+// *****************************ООП**********************************
+
+// *********Реализация ООП в JS***************************
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6,6 +22,103 @@
 // *****************************ТАЙМЕРЫ**************************
 // *****************************ТАЙМЕРЫ**************************
 
+// console.log(1)
+// const messages=['bash','powebash',"powebash =)"]
+// const boomConsole = (message,message1,message2) => {
+//     console.log(message)
+//     console.log(message1)
+//     console.log(message2)
+// }
+// const boomTimer=setTimeout(boomConsole,2000,...messages)
+// // clearTimeout(boomTimer)
+// console.log(3)
+//
+//
+
+// ****точность таймеров**********
+
+// const mark1=Number(performance.now().toFixed(1))
+// console.log(mark1)
+// setTimeout(()=>{
+//     const mark2=performance.now().toFixed(0)
+//     console.log(mark2-mark1)
+// },1000)
+//
+
+// ****работа с интервалами ************
+
+// const options1={
+//     hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric',
+//     year:'numeric',
+//     month: 'short',
+//     weekday: 'long'
+// }
+
+// console.log(new Intl.DateTimeFormat('ru-RU',options1).format(date))
+
+
+// const options1={
+//     hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric'
+// }
+//
+// const intervalMinute=setInterval(()=>{
+//     const now=new Date
+//     console.log(new Intl.DateTimeFormat('ru-Ru',options1).format(now)+' timer every minute\'s')
+// },1000*60)
+//
+// const intervalSecond=setInterval(()=>{
+//     const now=new Date
+//     console.log(new Intl.DateTimeFormat('ru-Ru',options1).format(now))
+// },1000)
+//
+// console.log(intervalMinute)
+// console.log(intervalSecond)
+//
+// setTimeout(()=>{
+//     clearInterval(2)
+// },5000)
+//
+
+// *****timer food*****
+// *****timer food*****
+// *****timer food*****
+
+
+// const optionsTimer={
+//     hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric'
+// }
+// const optionsTimerPizza={
+//     // hour:'numeric',
+//     minute:'numeric',
+//     second:'numeric'
+// }
+//
+// const locales='ru-Ru'
+//
+// const timerFood = (minute) => {
+//     const ms=minute*60*1000
+//     const end=new Date().getTime()+ms
+//    const interval=setInterval(()=>{
+//        const now=new Date()
+//        console.log(
+//            new Intl.DateTimeFormat(locales,optionsTimerPizza).format( end+100-now))
+//    },1000);
+//
+//     setTimeout(()=>{
+//         clearInterval(interval)
+//         console.log('Food is Ready')
+//     },ms)
+//
+// }
+// timerFood(0.5)
+//
+//
 
 
 
@@ -17,18 +130,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+// ******************Даты и время**********************
+// ******************Даты и время**********************
 // ******************Даты и время**********************
 //
 // const now = new Date();
@@ -67,6 +170,7 @@
 
 
 // ***операции с датами
+// ***операции с датами
 //
 // const date1=new Date(2024,10,15)
 // const date2=new Date(2024,11,17)
@@ -80,6 +184,7 @@
 // console.log(getDaysBetweenDates(date1,date2))
 
 
+// ***********сравнение дат ***********
 // ***********сравнение дат ***********
 
 // const first=new Date(2024,10,4)
@@ -120,6 +225,7 @@
 // console.log(isBirthday(user1))
 //
 
+// ************интернационализация дат****************
 // ************интернационализация дат****************
 
 //
@@ -163,78 +269,8 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// **********************Расчеты и Math***********************************
+// **********************Расчеты и Math***********************************
 // **********************Расчеты и Math***********************************
 //
 // console.log(Math.cbrt(27))
@@ -285,6 +321,7 @@
 //
 
 
+// ************** Интернационализация******
 // ************** Интернационализация******
 
 // const options1 = {
@@ -359,6 +396,8 @@
 //
 
 
+// ************** Set & Map ***** Сеты и Мэпы*****
+// ************** Set & Map ***** Сеты и Мэпы*****
 // ************** Set & Map ***** Сеты и Мэпы*****
 
 // const flights=['Ukraine','NY','London','Paris']
