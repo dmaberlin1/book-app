@@ -77,50 +77,169 @@ console.log(LoadAppTime)
 
 
 // ************************** Корзина Товаров*************************
+// ************************** Корзина Товаров*************************
+// ************************** Корзина Товаров*************************
+
+//
+// const Cart=function () {
+//  this.products=[];
+// }
+//
+// const product1={id:1,name:'Tomato',count:15}
+// const product2={id:2,name:'Potato',count:2}
+//
+// Cart.prototype.addProduct=function (product) {
+//     if(this.products.find(prod=>prod.id===product.id)) return
+//
+//     this.products.push(product)
+// }
+//
+// Cart.prototype.increaseAmount=function (id) {
+//     this.products=this.products.map(product=>{
+//         if(product.id==id){
+//             product.count++
+//             return product
+//         }
+//         return product
+//     })
+// }
+//
+//
+// Cart.prototype.decreaseAmount=function (id) {
+//     this.products=this.products.map(product=>{
+//         if(product.id==id){
+//             product.count--
+//             return product
+//         }
+//         return product
+//     }).filter(product=>product.count>0)
+// }
+//
+// const cart=new Cart()
+// cart.addProduct(product1)
+// cart.addProduct(product2)
+// console.log(cart)
+// cart.decreaseAmount(product2.id)
+// cart.decreaseAmount(product2.id)
+// cart.decreaseAmount(product1.id)
+// console.log(cart)
+//
+//
+//
+//
+//
 
 
-const Cart=function () {
- this.products=[];
+//                     ************ООП CLASSES********************
+//                      ************ООП CLASSES********************
+//  Cинтаксис классов скрывает под реализацию прототипов и фцию конструктора, которую
+//мы рассмотрели выше, ОН НЕ ЯВЛЯЕТСЯ СИНТАКСИЧЕСКИМ САХАРОМ, и ИМЕЕТ РАЗЛИЧИЯ
+
+//
+// class Book{
+//     isRead=false
+//     cover='unknown'
+//     review='unknown'
+//     constructor(title,author) {
+//         this.author=author;
+//         this.title=title;
+//     }
+//
+//
+//     read(){
+//         this.isRead=true
+//     }
+//     getReview(value){
+//         this.review=value
+//     }
+//
+// }
+//
+// const lotr=new Book('Lords Of The Rings','J.J.R Tolkien')
+// //
+// lotr.cover='Red'
+//
+// console.log(lotr)
+// console.log(lotr instanceof Book)
+// lotr.read()
+// console.log(lotr.isRead)
+// console.log(lotr.__proto__)
+//
+//
+
+//
+// const task={
+//     title:'Task1',
+//     dueTo:new Date('2023/01/01'),
+//
+//     get isOverdue(){
+//         return this.dueTo<new Date();
+//     },
+//
+//     set isOverdue(isOverdueTask){
+//         if(!isOverdueTask){
+//             this.dueTo=new Date()
+//         }
+//     }
+//
+// }
+// console.log(task.isOverdue)
+// task.isOverdue=false;
+// console.log(task)
+// console.log(task.isOverdue)
+//
+
+//
+// class Task{
+//     constructor(title,dueDate) {
+//         this.title=title
+//         this.dueDate=dueDate
+//     }
+//     get isOverdue(){
+//         return this.dueDate<new Date()
+//     }
+//     set isOverdue(isOverdueTask){
+//         if(!isOverdueTask){
+//             this.dueDate=new Date()
+//         }
+//     }
+//     set dueDate(date){
+//         //тем самым сделали валидацию при создании в конструкторе
+//         if(date<new Date()) return;
+//         this._dueDate=date;
+//
+//     }
+// }
+//
+// const newTask= new Task('Task2',new Date('2023/01/01'))
+//
+// console.log(newTask.isOverdue)
+// newTask.isOverdue=false
+// console.log(newTask.isOverdue)
+//
+// const secondTask=new Task('Task3',new Date('2022/01/01'))
+// console.log(secondTask)
+// secondTask.dueDate=new Date('2024/01/01')
+// console.log(secondTask)
+//
+//
+//
+
+// **************STATIC**************
+// **************STATIC**************
+
+class Test{
+    
+}
+const Numdec=function(num1){
+    return --num1
 }
 
-const product1={id:1,name:'Tomato',count:15}
-const product2={id:2,name:'Potato',count:2}
-
-Cart.prototype.addProduct=function (product) {
-    if(this.products.find(prod=>prod.id===product.id)) return
-
-    this.products.push(product)
-}
-
-Cart.prototype.increaseAmount=function (id) {
-    this.products=this.products.map(product=>{
-        if(product.id==id){
-            product.count++
-            return product
-        }
-        return product
-    })
-}
+console.log(Numdec(5))
 
 
-Cart.prototype.decreaseAmount=function (id) {
-    this.products=this.products.map(product=>{
-        if(product.id==id){
-            product.count--
-            return product
-        }
-        return product
-    }).filter(product=>product.count>0)
-}
 
-const cart=new Cart()
-cart.addProduct(product1)
-cart.addProduct(product2)
-console.log(cart)
-cart.decreaseAmount(product2.id)
-cart.decreaseAmount(product2.id)
-cart.decreaseAmount(product1.id)
-console.log(cart)
+
 
 
 
@@ -136,6 +255,7 @@ console.log(cart)
 // *****************************ТАЙМЕРЫ**************************
 // *****************************ТАЙМЕРЫ**************************
 // *****************************ТАЙМЕРЫ**************************
+
 
 // console.log(1)
 // const messages=['bash','powebash',"powebash =)"]
@@ -342,6 +462,8 @@ console.log(cart)
 
 // ************интернационализация дат****************
 // ************интернационализация дат****************
+// ************интернационализация дат****************
+
 
 //
 // const date=new Date()
