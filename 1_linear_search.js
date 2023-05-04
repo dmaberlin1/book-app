@@ -207,3 +207,14 @@ console.log(binarySearch6(arr1,8))
 console.log(counter6)
 
 
+
+
+function linearSearch3(arr,findItem) {
+    let position=-1;
+    for(let i=0;i<arr.length;i++){
+        if(findItem===arr[i]) return position=i
+    }
+        return position
+}
+
+console.log(linearSearch3(arr1,111))
