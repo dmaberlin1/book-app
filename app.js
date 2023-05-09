@@ -1,6 +1,565 @@
 'use strict'
 const LoadAppTime=Number(performance.now().toFixed(1))
 console.log(LoadAppTime)
+
+//***********************OOP SOLID (10)****************************************
+//***********************OOP SOLID (10)****************************************
+//***********************OOP SOLID (10)****************************************
+
+//****** принцип единственной ответственности
+//  класс должен делать только то что относится конкретно к  нему, не брать ответсвенность
+// за то что к нему не относится \\ разделение зон ответственности
+
+
+//принцип открытости и закрытости
+
+// class Treasure{
+//
+// }
+//
+// class Coin extends Treasure{
+//     value=1;
+// }
+//
+// class Crystal extends Treasure{
+//     value=10;
+// }
+// class Brilliant extends Treasure{
+//     value=20;
+// }
+//
+// class Inventory{
+//     #score;
+//
+//     pick(treasure){
+//         this.#score+=treasure.value;
+//     }
+//
+// }
+//
+
+
+
+//
+// ***************8Принцип подстановки барбары лисков
+// Принцип говорит что если мы сделали какой то частный класс от общего, то его безболезненно можно заменять там где нужно- общий класс на него.
+// например там где у нас есть Орк, который появился из врага, и там где мы используем
+// врага- подставим орка,  приложение наше не сломатеся. - Принцип Замены
+
+//*************Принцип разделения интерфейсов
+
+// Принцип говорит что какой то класс не должен зависеть от методов, которые на практике ему никогда не нужны. Это позволяет держать нам интерфейсы в более компактном виде, во вторых правильно разделять ответственность
+
+//
+// class Weapon{
+//     cost;
+//     constructor(cost) {
+//         this.cost=cost
+//     }
+//     dealDamage(){
+//         console.log('dealDamage method')
+//     }
+// }
+// class Rifle extends Weapon{
+//     constructor(cost) {
+//         super(cost);
+//     }
+//     shoot(){
+//         this.dealDamage()
+//     }
+// }
+//
+// class Sword extends Weapon{
+//     constructor(cost) {
+//         super(cost);
+//     }
+//     strike(){
+//         this.dealDamage()
+//     }
+// }
+//
+//
+
+
+// ****************************Принцип Инверсии Зависимостей
+// говорит о том что мы должны зависеть от абстракции , а не от конкретной реализации
+// одни модули, которые высокоуровневые модули, не должны зависеть  от более низкоуровневых,
+//     должны зависеть только от некоторой интерфейсной абстракции их реализации
+//
+// class DB{
+//     save(items){
+//         console.log('save to DB: '+items)
+//         //save
+//     }
+// }
+//
+// class MongoDB extends DB{
+//     //....
+//     save(items) {
+//         console.log('save to MongoDB: '+items)
+//     }
+// }
+//
+// class ToDoList{
+//     items=[1,2,3,4]
+//     // db=new DB()
+//     db;
+//     constructor(db) {
+//         this.db=db;
+//     }
+//     savaToDB(){
+//         this.db.save(this.items);
+//     }
+// }
+//
+// const list1=new ToDoList(new DB());
+// list1.savaToDB()
+// const list2=new ToDoList(new MongoDB())
+// list2.savaToDB()
+//
+//
+
+
+
+
+
+
+
+
+//****************************Принципы ооп в классах (9)****************************
+//****************************Принципы ооп в классах (9)****************************
+//****************************Принципы ооп в классах (9)****************************
+
+//абстракция vs инкапсуляция
+
+//
+// class Film {
+//     #name;
+//     #author;
+//     rating;
+//     #length;
+//     //name author length инапсулираем, скрываем от публичного доступа
+//     constructor(name,author,length) {
+//         this.#name=name;
+//         this.#length=length;
+//         this.#author=author
+//     }
+//
+//     get name(){
+//        return this.#name
+//     }
+//     get author(){
+//         return this.#author
+//     }
+//     get length(){
+//         return this.#length
+//     }
+// }
+//
+
+//***********************************Наследование***********************
+
+//
+// const Book=function (title,author) {
+//     this.title=title;
+//     this.author=author
+// }
+//
+// Book.prototype.buy=function (){
+//     console.log('Buy')
+// }
+//
+// const Audiobook=function (title,author,lenMin) {
+//     Book.call(this,title,author)
+//     this.lenMin=lenMin;
+//     this.title=title;
+//     this.author=author
+// }
+//
+//
+// Audiobook.prototype=Object.create(Book.prototype)
+// Audiobook.prototype.constructor=Audiobook;
+// Audiobook.prototype.log=function () {
+//     console.log(`${this.title}- ${this.lenMin} Min`);
+// }
+//
+// const bookLotr=new Audiobook('LOTR','Tolkien',20*60)
+// bookLotr.log()
+//
+// console.log(bookLotr instanceof Audiobook)
+// console.log(bookLotr instanceof Book)
+//
+//
+// // in es6
+//
+// //
+// class Book{
+//     constructor(title,author) {
+//         this.title=title;
+//         this.author=author;
+//     }
+//
+//     buy(){
+//         console.log('Buy');
+//     }
+//     info(){
+//         console.log(`${this.author}`)
+//     }
+//
+// }
+//
+//
+// class AudioBook extends Book{
+//     constructor(title,author,lenMin) {
+//         super(title,author);
+//         this.lenMin=lenMin;
+//     }
+//
+//     log(){
+//         console.log(`${this.title} -${this.lenMin}`);
+//     }
+// }
+//
+// let lotr=new AudioBook('lotr','Tokien',60*20)
+//
+// // console.log(lotr.author)
+// // lotr.log()
+//
+//
+// //***************************************override методов********
+// //важно то что мы перезаписываем , должно хотя бы воспроизводить исходное
+//
+//
+// class Ebook extends Book{
+//     constructor(title,author,format) {
+//         super(title,author);
+//         this.format=format
+//     }
+//     info(){
+//         console.log(`${this.format} ${this.title}`)
+//     }
+//
+// }
+//
+// const source=new Ebook('Source','Ann Reid','PDF')
+// source.info()
+//
+//
+//
+// class Enemy{
+//     health;
+//
+//     constructor(health) {
+//         this.health=health
+//     }
+//
+//     receiveDamage(damage){
+//         this.health=this.health-damage
+//         this.health<1? console.log('enemy is defeated'):console.log(this.health)
+//
+//
+//     }
+// }
+//
+// class Sword{
+//     #damage
+//     constructor(damage) {
+//         this.#damage=damage
+//     }
+//     strike(enemy){
+//         enemy.receiveDamage(this.#damage)
+//     }
+// }
+//
+// const enemy1=new Enemy(100)
+// const sword1=new Sword(25)
+// sword1.strike(enemy1)
+// sword1.strike(enemy1)
+// sword1.strike(enemy1)
+// sword1.strike(enemy1)
+//
+//
+// class Orc extends Enemy{
+//     constructor(health) {
+//         super(health);
+//     }
+//
+//     receiveDamage(damage) {
+//         if(Math.random()>0.5){
+//             this.health=this.health-damage;
+//         }
+//         this.health<1 ? console.log('Orc is defeated'):
+//
+//         console.log(this.health)
+//
+//     }
+// }
+//
+// const orc1=new Orc(100)
+// const sacredSword=new Sword(100)
+// sacredSword.strike(orc1)
+//
+
+///***************************************Виды полиморфизма
+
+//Ad-hock полиморфизм - возможность по разному исполнять фцию, в зависимости от типа данных
+// Параметрический полиморфизм  - хороший пример console.log() -можем вывести всё что угодно
+// Полиморфизм подтипов   - полиморфизм который имеется виду в ооп
+
+
+
+
+
+//******************** Паттерны Building & Chaining*************************
+
+
+//Паттерн возвращения this, позволяет использовать chaining методы
+// class Wallet {
+//     balance=0;
+//
+//     add (sum){
+//         this.balance +=sum
+//         return this
+//     }
+//     remove(sum){
+//         this.balance-=sum;
+//         return this
+//     }
+//     showBalance(){
+//         console.log(this.balance+' - Your balance')
+//         return this
+//     }
+// }
+//
+// const wallet1=new Wallet()
+// const res=wallet1.add(100).showBalance()
+//
+// class Builder{
+//     house={};
+//     addRoof(){
+//         this.house.roof='Roof'
+//         console.log('Roof are finish')
+//         return this
+//     }
+//     addFloor(){
+//         this.house.floor='Floor';
+//         console.log('Floor are finish')
+//         return this
+//     }
+//     execute(){
+//         return this.house
+//     }
+// }
+//
+// const res2=new Builder().addRoof().addFloor().execute()
+// console.log(res2)
+//
+//
+
+//                     ************ООП CLASSES******************** Классы (8)
+//                      ************ООП CLASSES********************
+//                      ************ООП CLASSES********************
+//  Cинтаксис классов скрывает под реализацию прототипов и фцию конструктора, которую
+//мы рассмотрели выше, ОН НЕ ЯВЛЯЕТСЯ СИНТАКСИЧЕСКИМ САХАРОМ, и ИМЕЕТ РАЗЛИЧИЯ
+
+//
+// class Book{
+//     isRead=false
+//     cover='unknown'
+//     review='unknown'
+//     constructor(title,author) {
+//         this.author=author;
+//         this.title=title;
+//     }
+//
+//
+//     read(){
+//         this.isRead=true
+//     }
+//     getReview(value){
+//         this.review=value
+//     }
+//
+// }
+//
+// const lotr=new Book('Lords Of The Rings','J.J.R Tolkien')
+// //
+// lotr.cover='Red'
+//
+// console.log(lotr)
+// console.log(lotr instanceof Book)
+// lotr.read()
+// console.log(lotr.isRead)
+// console.log(lotr.__proto__)
+//
+//
+
+//
+// const task={
+//     title:'Task1',
+//     dueTo:new Date('2023/01/01'),
+//
+//     get isOverdue(){
+//         return this.dueTo<new Date();
+//     },
+//
+//     set isOverdue(isOverdueTask){
+//         if(!isOverdueTask){
+//             this.dueTo=new Date()
+//         }
+//     }
+//
+// }
+// console.log(task.isOverdue)
+// task.isOverdue=false;
+// console.log(task)
+// console.log(task.isOverdue)
+//
+//*********************геттеры и сеттеры**********************************
+//
+// class Task{
+//     constructor(title,dueDate) {
+//         this.title=title
+//         this.dueDate=dueDate
+//     }
+//     get isOverdue(){
+//         return this.dueDate<new Date()ъъъ
+//     }
+//     set isOverdue(isOverdueTask){
+//         if(!isOverdueTask){
+//             this.dueDate=new Date()
+//         }
+//     }
+//     set dueDate(date){
+//         //тем самым сделали валидацию при создании в конструкторе
+//         if(date<new Date()) return;
+//         this._dueDate=date;
+//
+//     }
+// }
+//
+// const newTask= new Task('Task2',new Date('2023/01/01'))
+//
+// console.log(newTask.isOverdue)
+// newTask.isOverdue=false
+// console.log(newTask.isOverdue)
+//
+// const secondTask=new Task('Task3',new Date('2022/01/01'))
+// console.log(secondTask)
+// secondTask.dueDate=new Date('2024/01/01')
+// console.log(secondTask)
+//
+//
+//
+
+// **************STATIC**************
+// **************STATIC**************
+//
+// class Test{
+// static a=1;
+// static hello(){
+//     console.log('hello for Test class ')
+// }
+// }
+//
+// // Test.hello()
+//
+//
+//
+// //*****************приватные методы и свойства*****************
+//
+// class Car {
+//     #vin;
+//     speed;
+//
+//     #changeVin(value){
+//         console.log('changed')
+//         this.#vin=value
+//         console.log(this.#vin)
+//     }
+//
+//     publicChangeVin(value){
+//         this.#changeVin(value)
+//     }
+//
+//     static #field=3
+//     static{
+//         this.#field=5;
+//     }
+// }
+//
+//
+// const car=new Car();
+// car.publicChangeVin(111000)
+//
+//
+// //**************************Create Класс пользователя********************8
+//
+// class User{
+//     #login
+//     #_password
+//     constructor(login,password) {
+//         this.#login=login
+//         this.#password=password
+//         //взяли сеттер , который ставит приватный пароль, перед этим "хешируя" его
+//     }
+//     set #password(pass){
+//         this.#_password=pass.split('').reverse().join() //перевернули пароль
+//     }
+//     get #password(){
+//         return this.#_password.split('').reverse().join() //расшифровали
+//     }
+//     get login(){
+//         return this.#login
+//     }
+//     checkPassword(pass){
+//         return this.#password===pass;
+//     }
+//     changePassword(oldPass,newPass){
+//         if(this.checkPassword(oldPass)) {
+//             this.#password = newPass
+//             return true
+//         }
+//         else return false
+//     }
+// }
+//
+// const user1=new User('test1','pass')
+// console.log(user1)
+// user1.changePassword('pass','pass1')
+// console.log(user1)
+//
+//
+//
+//
+//
+// /******************************Object create********************/
+//
+// const UserObj={
+//
+//     init(email,password){
+//         this.email=email;
+//         this.password=password
+//     },
+//
+//     logEmail(){
+//         console.log(this.email)
+//     }
+// }
+//
+// const user_1=Object.create(UserObj)
+// user_1.init('dma@gmail.com','123123')
+// user_1.logEmail()
+// console.log(user_1)
+//
+//
+//
+//
+//
+//
+
+
+
 // *****************************ООП**********************************
 // *****************************ООП**********************************
 // *****************************ООП**********************************
@@ -128,123 +687,6 @@ console.log(LoadAppTime)
 //
 //
 //
-
-
-//                     ************ООП CLASSES********************
-//                      ************ООП CLASSES********************
-//  Cинтаксис классов скрывает под реализацию прототипов и фцию конструктора, которую
-//мы рассмотрели выше, ОН НЕ ЯВЛЯЕТСЯ СИНТАКСИЧЕСКИМ САХАРОМ, и ИМЕЕТ РАЗЛИЧИЯ
-
-//
-// class Book{
-//     isRead=false
-//     cover='unknown'
-//     review='unknown'
-//     constructor(title,author) {
-//         this.author=author;
-//         this.title=title;
-//     }
-//
-//
-//     read(){
-//         this.isRead=true
-//     }
-//     getReview(value){
-//         this.review=value
-//     }
-//
-// }
-//
-// const lotr=new Book('Lords Of The Rings','J.J.R Tolkien')
-// //
-// lotr.cover='Red'
-//
-// console.log(lotr)
-// console.log(lotr instanceof Book)
-// lotr.read()
-// console.log(lotr.isRead)
-// console.log(lotr.__proto__)
-//
-//
-
-//
-// const task={
-//     title:'Task1',
-//     dueTo:new Date('2023/01/01'),
-//
-//     get isOverdue(){
-//         return this.dueTo<new Date();
-//     },
-//
-//     set isOverdue(isOverdueTask){
-//         if(!isOverdueTask){
-//             this.dueTo=new Date()
-//         }
-//     }
-//
-// }
-// console.log(task.isOverdue)
-// task.isOverdue=false;
-// console.log(task)
-// console.log(task.isOverdue)
-//
-
-//
-// class Task{
-//     constructor(title,dueDate) {
-//         this.title=title
-//         this.dueDate=dueDate
-//     }
-//     get isOverdue(){
-//         return this.dueDate<new Date()
-//     }
-//     set isOverdue(isOverdueTask){
-//         if(!isOverdueTask){
-//             this.dueDate=new Date()
-//         }
-//     }
-//     set dueDate(date){
-//         //тем самым сделали валидацию при создании в конструкторе
-//         if(date<new Date()) return;
-//         this._dueDate=date;
-//
-//     }
-// }
-//
-// const newTask= new Task('Task2',new Date('2023/01/01'))
-//
-// console.log(newTask.isOverdue)
-// newTask.isOverdue=false
-// console.log(newTask.isOverdue)
-//
-// const secondTask=new Task('Task3',new Date('2022/01/01'))
-// console.log(secondTask)
-// secondTask.dueDate=new Date('2024/01/01')
-// console.log(secondTask)
-//
-//
-//
-
-// **************STATIC**************
-// **************STATIC**************
-
-class Test{
-    
-}
-const Numdec=function(num1){
-    return --num1
-}
-
-console.log(Numdec(5))
-
-
-
-
-
-
-
-
-
 
 
 
