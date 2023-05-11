@@ -1,13 +1,441 @@
 'use strict'
-const LoadAppTime=Number(performance.now().toFixed(1))
+const LoadAppTime = Number(performance.now().toFixed(1))
 console.log(LoadAppTime)
+
+
+// **********************************Async await(14)******************************
+// **********************************Async await*******************************
+// **********************************Async await******************************
+//***************************современный асинхронный js****************
+
+// async function getProducts() {
+// fetch('https://dummyjson.com/products')
+//     .then(response=>response.json())
+//     .then(data=>console.log(data))
+//нам теперь не нужно писать городить then, нам не нужно внутри делать свои коллбеки
+//мы просто линейно это пишем и всё работает внутри async await
+//
+//     try{
+//         const productsResponse=await fetch('https://dummyjson.com/products')
+//         //await- положи ответ когда будет готов в res
+//         if(!productsResponse.ok){
+//             throw new Error(productsResponse.status)
+//         }
+//         const {products}= await productsResponse.json()
+//         console.log(products)
+//
+//         const productResponse=await
+//             fetch('https://dummyjson.com/products/'+products[0].id)
+//         const product= await productResponse.json()
+//         console.log(product)
+//     }
+//     catch (e) {
+//         console.error(e)
+//     } finally {
+//         console.log('Finally getProducts func')
+//     }
+// }
+// //как только мы говорим что фция асинхронная, она по умолчанию возвращает промис
+// getProducts()
+// console.log('Start')
+//
+// try{
+//     const a=5;
+//     a=4
+// }catch (e) {
+//     console.log(e)
+// }
+//
+//
+//
+//
+
+
+/* Получить Геолокацию юзера через Geolocation.getCurrentPosition()(WEB API)
+и по координатам определить город, отправив запрос
+https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=00&longitude=00
+ */
+
+//
+// function getMyCoordinates() {
+//     return new Promise((resolve, reject)=>{
+//         navigator.geolocation.getCurrentPosition(
+//             ({coords})=>{
+//                 resolve({latitude:coords.latitude,longitude:coords.longitude})
+//             },
+//             (err)=>{
+//                 reject(err)
+//             }
+//             );
+//     })
+// }
+//
+
+// async function getMyCity() {
+//     try{
+//         const {latitude,longitude}=await getMyCoordinates()
+//         const response=await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}`)
+//         if(!response.ok) throw new Error(response.status)
+//
+//         const data=await response.json();
+//         console.log(data)
+//         console.log(data.city)
+//
+//     }
+//     catch (e) {
+//     console.error(e)
+//     }
+// }
+//
+// getMyCity()
+//
+//
+//
+
+// -----------------------------------------асинхронные методы
+
+// class ProductRepository{
+//     async getProducts(){
+//         const response=await fetch('https://dummyjson.com/products')
+//         console.log(await response.json());
+//     }
+// }
+//
+// const repo=new ProductRepository()
+// repo.getProducts()
+
+// const asyncArrow = async () => {
+//     const response = await fetch('http://dummyjson.com/products')
+//     const data = await response.json();
+//     return data
+// }
+// console.log(1)
+// asyncArrow().then(
+//     data => {console.log(data)
+// console.log(3)
+//     }
+// ).finally(()=>console.log(4))
+// ;
+
+
+// const asyncArrow1 = async () => {
+//     try {
+//         const response = await fetch('http://dummyjson.com/products')
+//         const data = await response.json();
+//         return data
+//     } catch (e) {
+//         console.error(e)
+//         throw e;
+//     }
+// }
+//
+// //intermediate function
+// //вот таким не хитрым способом , мы можем на верхнем уровне, обеспечить правильную последовательность выполнения
+// (async()=>{
+//     console.log(1)
+//     const res=await asyncArrow1()
+//     console.log(res)
+//     console.log(2)
+// })()
+
+
+// asyncArrow1().then(
+//     data => {
+//         console.log(data)
+//         console.log(3)
+//     }
+// )
+//     .catch(e => console.error(e))
+//     .finally(() => console.log(4));
+
+
+
+
+
+
+// ----------------параллельное выполнение
+
+async function getAllProducts() {
+    const response=await fetch('https://dummyjson.com/products');
+    return response.json();
+}
+
+async function getProduct(id){
+    const response=await fetch('https://dummyjson.com/products/'+id)
+    return response.json()
+}
+async function main(){
+    const {products}=await getAllProducts();
+    const res = await Promise.all([
+        getProduct(1),
+        getProduct(2),
+        getProduct(3)
+    ])
+    console.log(res)
+    // for(const product of products){
+    //     const res=await getProduct(product.id)
+    //     console.log(res)
+    // }
+}
+
+main();
+
+//************************** Event Loop(13)****************************
+//************************** Event Loop****************************
+//************************** Event Loop****************************
+
+
+// микро таски имеют высший приоритет над обычными коллбеками
+
+// попадает в стек, из стека если не асинхронный сразу выполняется,  что выполняется не сразу и требует асинхронности- идёт в web api,
+// далее что подходит пол коллбек,  уходит в очередь коллбеков Callback Queue, если есть таймеры, тоже уходит в очередь коллбеков
+
+// далее есть microtask queue , очередь микротасков,коллбеки микротасков туда попадают промисы
+// микротаски, это вторая очередь, относительно которой крутится наш eventloop
+// у очереди микротасков приоритет над Callback Queue
+
+
+// console.log(1)
+//
+// setTimeout(()=>{
+//     console.log(2);
+// },0)
+// Promise.resolve(3).then((res)=>{
+//     console.log(res)
+//     for(let i=0;i<1000000000;i++){
+//
+//     }
+// })
+//
+// console.log(4)
+//
+// for(let i=0;i<1000000000;i++){
+//
+// }
+
+
+//******создание просто Promise*****
+//
+// const prom = new Promise((resolve, reject) => {
+//     if (new Date() < new Date('01/01/2024')) {
+//         reject(new Error('Error from prom'))
+//     }
+//     resolve('Success')
+// })
+//
+// prom
+//     .then(data => console.log(data))
+//     .catch(error => console.log(error))
+//
+// function timeout(sec) {
+//     return new Promise((resolve)=>{
+//         setTimeout(()=>{
+//             resolve()
+//         },sec*1000)
+//     })
+// }
+//
+// timeout(2).then(()=>{
+//     console.log('promise-timeout complete')
+//     return timeout(3)
+// }).then(()=>{
+//     console.log('promise 2th complete')
+//     return timeout(4)
+// }).then(()=>{
+//     console.log('promise 3th complete')
+// })
+//
+
+//-------------------------------------------статические методы Promise
+
+// const prom=new Promise((resolve)=>{
+//     console.log('Constructor')
+//     setTimeout(()=>{
+//         resolve('Timer')
+//     },2000)
+// })
+// prom.then(data=>console.log('data'))
+// Promise.resolve('Instant-resolve from Promise').then(data=>console.log(data))
+// Promise.reject(new Error('Error')).catch(error=>console.error(error))
+//
+//сделать фцию myFetch, которая выполняет внутри XMLHttpRequest
+
+// function myFetch(url) {
+//     return new Promise((resolve,reject)=>{
+//         const request=new XMLHttpRequest();
+//         request.open('GET',url)
+//         request.send();
+//
+//         request.addEventListener('load',function () {
+//             if(this.status>400){
+//                 reject(new Error(this.status))
+//             }
+//             resolve(this.responseText);
+//         })
+//         request.addEventListener('error',function () {
+//             reject (new Error(this.status))
+//         })
+//         request.addEventListener('timeout',function () {
+//             reject(new Error('Timeout'))
+//         })
+//     })
+// }
+//
+// myFetch('https://dummyjson.com/produc1ts').then(data=>console.log(data))
+//     .catch(err=>console.error(err))
+
+
+//*************************************Promises (12)****************************
+//*************************************Promises (12)****************************
+//*************************************Promises (12)****************************
+//Promise -контейнер для значения , которое вернётся в будущем
+// + не нужно использовать коллбек
+// +не нужно использовать события (event listener)
+
+// жизненный цикл Промиса - Pending -settled - v1 Fulfilled - v2 Rejected
+
+// const response=fetch('https://dummyjson.com/products/1')
+// console.log(response)
+
+// fetch('https://dummyjson.com/products')
+//     .then(response => {
+//             console.log(response)
+//             return response.json()
+//         },
+//     ).then(({products}) => {
+//         console.log(products)
+//         return fetch('https://dummyjson.com/products/' + products[0].id)
+//     }
+// )
+//     .then(response => response.json()).then(data => console.log(data))
+//     .catch(error=>console.log(error))
+//     .finally(()=>{
+//         console.log('Finally')
+//     })
+
+//в кетч будем проваливаться при любой ошибки из этой цепочки
+
+//ФЦИЯ helper
+// function getData(url,errorMessage) {
+//     return fetch(url)
+//         .then(response=>{
+//             if(!response.ok){
+//                 throw new Error(`${errorMessage} ${response.status}`)
+//             }
+//             return response.json()
+//         })
+// }
+//
+// getData('https://dummyjson.com/products','Can not get products')
+//     .then(({products})=>{
+//         console.log(products)
+//         return getData('https://dummyjson.com/products/'+products[0].id,'Can not get product')
+//     })
+//     .then(data=>{
+//         console.log(data)
+//     })
+//     .catch(error=>{
+//         const el=document.querySelector('.filter')
+//         el.innerHTML=error.message
+//     })
+//
+
+
+//
+//
+// function createSelect(array) {
+//     const el = document.querySelector('.filter');
+//     el.innerHTML = `<select>
+//     ${array.map(arrEl => `<option value=${arrEl}>${arrEl}</option>`)}
+// </select>`
+// }
+//
+// function getCategories() {
+//     fetch('https://dummyjson.com/products')
+//         .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error(`Is error ${response.status}`)
+//                 }
+//                 return response.json()
+//             }
+//         )
+//         .then(({products})=>{
+//             console.log(products)
+//             return fetch('https://dummyjson.com/products/'+products[0].id)
+//         })
+//         .then(response=> response.json())
+//         .then(data=>{
+//             console.log(data)
+//         })
+//         .catch(error => {
+//             const el=document.querySelector('.filter')
+//             el.innerHTML=error.message
+//         })
+// }
+//
+// getCategories();
+//
+//
+
+
+//****************************************Асинхронный JS (11)************************
+//****************************************Асинхронный JS (11)************************
+//****************************************Асинхронный JS (11)************************
+
+
+// dummyJSON
+// xml http request
+//
+// function req(id) {
+//     const request=new XMLHttpRequest()
+//
+//     request.open('GET','https://dummyjson.com/products/'+id);
+//     request.send();
+//
+//     request.addEventListener('load',function () {
+//         console.log(JSON.parse(this.responseText))
+//     })
+// }
+//
+// req(1)
+// req('')
+// req(3)
+//
+// console.log('end')
+//
+//
+
+
+// получить среднюю цены 30 товаров из апи
+
+// const request=new XMLHttpRequest()
+// request.open('GET','https://dummyjson.com/products')
+// request.send()
+//
+// request.addEventListener('load',function () {
+//     let sum=0
+//     // const data=JSON.parse(this.responseText)
+//     const {products}=JSON.parse(this.responseText)
+//     console.log(products)
+//     products.map(product=>{
+//
+//         sum+=product.price
+//
+//        return sum
+//     })
+//     console.log(Math.ceil(sum/products.length))
+// })
+//
+//
+//
+
 
 //***********************OOP SOLID (10)****************************************
 //***********************OOP SOLID (10)****************************************
 //***********************OOP SOLID (10)****************************************
 
 //****** принцип единственной ответственности
-//  класс должен делать только то что относится конкретно к  нему, не брать ответсвенность
+//  класс должен делать только то что относится конкретно к  нему, не брать ответственность
 // за то что к нему не относится \\ разделение зон ответственности
 
 
@@ -37,7 +465,6 @@ console.log(LoadAppTime)
 //
 // }
 //
-
 
 
 //
@@ -118,12 +545,6 @@ console.log(LoadAppTime)
 // list2.savaToDB()
 //
 //
-
-
-
-
-
-
 
 
 //****************************Принципы ооп в классах (9)****************************
@@ -305,9 +726,6 @@ console.log(LoadAppTime)
 //Ad-hock полиморфизм - возможность по разному исполнять фцию, в зависимости от типа данных
 // Параметрический полиморфизм  - хороший пример console.log() -можем вывести всё что угодно
 // Полиморфизм подтипов   - полиморфизм который имеется виду в ооп
-
-
-
 
 
 //******************** Паттерны Building & Chaining*************************
@@ -559,7 +977,6 @@ console.log(LoadAppTime)
 //
 
 
-
 // *****************************ООП**********************************
 // *****************************ООП**********************************
 // *****************************ООП**********************************
@@ -689,11 +1106,6 @@ console.log(LoadAppTime)
 //
 
 
-
-
-
-
-
 // *****************************ТАЙМЕРЫ**************************
 // *****************************ТАЙМЕРЫ**************************
 // *****************************ТАЙМЕРЫ**************************
@@ -796,15 +1208,6 @@ console.log(LoadAppTime)
 // timerFood(0.5)
 //
 //
-
-
-
-
-
-
-
-
-
 
 
 // ******************Даты и время**********************
@@ -940,12 +1343,6 @@ console.log(LoadAppTime)
 // console.log(navigator.languages)
 // console.log(new Intl.DateTimeFormat(navigator.language,options3).format(date))
 //
-
-
-
-
-
-
 
 
 // **********************Расчеты и Math***********************************
