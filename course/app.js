@@ -2,6 +2,200 @@
 const LoadAppTime = Number(performance.now().toFixed(1))
 console.log(LoadAppTime)
 
+// ******************Dom & Events***********************
+//  у дома всё наследуется от Event Target  , отдельная цепочка Node и далее
+// и отдельная Window, без следующих наследований
+//
+// const wrapper=document.querySelector('.wrapper')
+// for(let i=0;i<=99;i++){
+//     const el=document.createElement('div');
+//     el.innerHTML=i;
+//     wrapper.append(el)
+// }
+//
+// function search(event) {
+//     const inputValue=event.target.value;
+//     console.log(inputValue)
+//     for(const el of [...wrapper.children]){
+//         if(el.innerHTML.includes(inputValue)){
+//
+//             el.classList.add('yellow');
+//             continue;
+//         }
+//         // el.classList.remove('yellow')
+//     }
+//
+// }
+//
+
+//
+// const el=document.querySelector('.wrapper')
+// const ul1=document.createElement('ul')
+// const li1=document.createElement('li')
+// const li2=document.createElement('li')
+// const li3=document.createElement('li')
+// li1.innerHTML='li1'
+// li2.innerHTML='li2'
+// li3.innerHTML='li3'
+// el.append(ul1)
+// ul1.append(li1)
+// ul1.append(li2)
+// ul1.append(li3)
+// function generate() {
+//     ul1.remove()
+// }
+//
+//
+//---------------------------------визуальное положение элементов
+// function generate(event) {
+//     // console.log(event.target.getBoundingClientRect())
+//     console.log('x offset '+ window.pageXOffset)
+//     console.log('y offset ' + window.pageYOffset)
+//     console.log('clientWidth '+document.documentElement.clientWidth)
+//     console.log('clientHeight'+document.documentElement.clientHeight)
+//
+//     const el=document.querySelector('.down')
+//     const rectEl=el.getBoundingClientRect()
+//     // console.log(el.getBoundingClientRect())
+//     window.scrollTo({
+//         left:window.pageYOffset+rectEl.left,
+//         top:window.pageYOffset+rectEl.top,
+//         behavior:'smooth'
+//     })
+// }
+
+//типы событий и обработчики
+
+// const button=document.querySelector('.button')
+// const eventHandler=function () {
+//     console.log('event1')
+// }
+// const eventHandler1=function () {
+//     console.log('event2')
+//     button.removeEventListener('mouseover',eventHandler)
+//
+// }
+//
+// button.addEventListener('mouseover',eventHandler)
+// button.addEventListener('click',eventHandler1)
+
+
+//---------------------------------------всплытие событий
+
+// console.log(event.target)  - укажет на что было нажатие в самом начале, где бы он не находился, даже если я его запишу в элемент выше по дереву,
+// console.log(event.currentTarget) укажет на текущий элемент, даже если было нажатие на элемент глубже, он покажет на элемент который нажат, не учитывая всплытие
+
+// event.stopPropagation() - практика не идеальная, в некоторых случаях можно юзать, где нужно узко ограничить всплытие элемента
+// const button=document.querySelector('.button');
+// const inner=document.querySelector('.inner');
+// const wrapper=document.querySelector('.wrapper');
+//
+// button.addEventListener('click',function (event){
+//     this.style.backgroundColor='#5c4988';
+//     console.log('button')
+//     // console.log(event.currentTarget)
+//
+//     // console.log(event.target)
+//     event.stopPropagation()
+// })
+//
+// inner.addEventListener('click',function (event) {
+//     console.log('inner')
+//     console.log(event.target)
+//     // console.log(event.currentTarget)
+// },true)
+//
+// //благодаря опции true- мы поймали наше событие еще до того как оно у нас погрузилось в дочерние элементы , используется крайне редко
+//
+//
+//
+
+
+//------------------делегирование событий
+// представим что мы сейчас будем имплементировать , огромный список юзеров
+// которые зарегались, у нас на сайте
+//
+// const wrapper=document.querySelector('.wrapper')
+//
+// for(let i=0;i<=99;i++){
+//     const el=document.createElement('div')
+//     el.innerHTML=`User with id ${i}`
+//     el.setAttribute('data-id',i)
+//     // el.addEventListener('click',()=>{
+//     //     console.log(`Deleted: user ${i}`)
+//     // })
+//     // будет 100 лишних фций, и это не очень хорошая практика
+//     wrapper.append(el)
+// }
+//
+// // //делегируем событие более верхнему элементу, и передаём туда всю информацию
+// // в данном случае установленный кастомный аттрибут 'data-id' и нашли его с помощью event.target.getAttribute,   евент таргет нашел таргет который был нажат начиная с самого нижнего дочерного элема на который был клик
+// wrapper.addEventListener('click',function (event){
+//     // console.log(event.target.getAttribute('data-id'))
+//     const i=event.target.getAttribute('data-id')
+//     console.log(i)
+// })
+
+
+//---------------------перемещение по DOM-----------------------------
+
+//
+// const wrapper=document.querySelector('.wrapper')
+// const button=document.querySelector('.button')
+// // const inner=document.querySelector('.inner')
+// const inner=wrapper.querySelector('.inner')
+// console.log(inner.childNodes)
+// //вернёт итерабельный обьект
+// console.log(inner.children)
+// // вернёт коллекцию хтмл документов
+// console.log([...inner.children])
+// //получаем полноценный массив, с которым можем работать
+// console.log(inner.children[0])
+//
+// console.log(inner.parentNode)
+// console.log(inner.parentElement)
+//
+// console.log(button.closest('.wrapper'))
+// // возвращает ближейщего родителя по селектору
+// //queryselector ищет вниз по дереву, closest ищет вверх, ТОЛЬКО ВВЕРХ по дереву
+//
+// //элементы для выбора на том же уровне, несколько способов
+// console.log(button.previousElementSibling)//будет null потому что это первый элем, следующие после него можно найти с помощью next
+// console.log(button.previousSibling)  //будет текст в виде пустого переноса, между дивами есть перенос, в данном случае
+//
+// console.log(button.nextElementSibling)
+// // console.log(button.nextSibling)
+//
+// // чтобы получить всю коллекцию кнопок, через одну кнопку
+// console.log(button.parentElement.children[2])
+
+
+//-----------------------Жизненный цикл событий DOM-------------------
+
+//событие когда контент загрузился
+//момент когда html распарсился и построилось дом дерево
+//этот метод  НЕ отрабатывает  загрузку картинок и тп
+// document.addEventListener('DOMContentLoaded',function (e){
+//     console.log('DOMContentLoaded')
+//     console.log('1')
+// })
+//
+// //этот метож как раз отрабатывает когда загрузилось ВСЁ
+// window.addEventListener('load',function (e) {
+//     console.log('load')
+//     console.log(e)
+// })
+
+
+//используеться только для предупреждения "ВОЗМОЖНО, внесенные изменения не сохранятся, в таком варианте как описан ниже
+// window.addEventListener('beforeunload',function (e) {
+//     e.preventDefault()
+//     e.returnValue='';
+//
+// })
+//
+//--------------------загрузка скриптов async & defer-----------------
+
 
 // **********************************Async await(14)******************************
 // **********************************Async await*******************************
@@ -154,31 +348,118 @@ https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=00&longitude=0
 
 
 // ----------------параллельное выполнение
+//
+// async function getAllProducts() {
+//     const response=await fetch('https://dummyjson.com/products');
+//     return response.json();
+// }
+//
+// async function getProduct(id){
+//     const response=await fetch('https://dummyjson.com/products/'+id)
+//     return response.json()
+// }
+// async function main(){
+//     const {products}=await getAllProducts();
+//     // const res = await Promise.all([
+//     //     getProduct(1),
+//     //     getProduct(2),
+//     //     getProduct(3)
+//     // ])
+//     const res=await Promise.all(products.map(product=>getProduct(product.id)))
+//     console.log(res)
+//     // for(const product of products){
+//     //     const res=await getProduct(product.id)
+//     //     console.log(res)
+//     // }
+// }
+//
+// main();
 
-async function getAllProducts() {
-    const response=await fetch('https://dummyjson.com/products');
-    return response.json();
-}
+//другие комбинации Promise
+// async function getProduct(id){
+//  const response=await fetch('https://dummyjson.com/products/'+id)
+//  return response.json()
+// }
+//
+//
+// async function getProductError(id){
+// const response=await fetch ('https://dummyjson.com/products/'+id)
+//     return response.json()
+// }
+//
+// async function main(){
+// const res=await Promise.allSettled([
+//     getProduct(1),
+//     getProduct(2),
+//     getProduct(4544)
+// ])
+//     // console.log(res)
+//
+//     const res1=await Promise.race([
+//         getProduct(15),
+//         getProduct(2)
+//     ])
+//     console.log(res1)
+// }
+// main()
+//
 
-async function getProduct(id){
-    const response=await fetch('https://dummyjson.com/products/'+id)
-    return response.json()
-}
-async function main(){
-    const {products}=await getAllProducts();
-    const res = await Promise.all([
-        getProduct(1),
-        getProduct(2),
-        getProduct(3)
-    ])
-    console.log(res)
-    // for(const product of products){
-    //     const res=await getProduct(product.id)
-    //     console.log(res)
-    // }
-}
+// -----------------------все возможности фетч
+// единственный минус фетча, дополнительно конвертировать json
 
-main();
+// async function main(){
+//     const res=await fetch('https://dummyjson.com/auth/login',{
+//         method:'POST',
+//         headers:{
+//             'Content-Type':'application/json',
+//             // 'Authorization':`Token`
+//         },
+//         body:JSON.stringify({
+//             username:'kminchelle',
+//             password:'0lelplR'
+//             })
+//     });
+//     const data=await res.json();
+//     console.log(data)
+// }
+//
+// main()
+
+
+// Сделать генератор 3х идей от скуки https://www.boredapi.com/api/activity
+// с отображением на странице
+//
+// const wrapper=document.querySelector('.wrapper')
+//
+//
+// async function getActivity(){
+//     const res=await fetch('https://www.boredapi.com/api/activity')
+//     return res.json()
+// }
+//
+// async function generate() {
+//  try{
+//      wrapper.innerHTML='';
+//      const data=await Promise.all([
+//      getActivity(),
+//      getActivity(),
+//      getActivity(),
+//  ])
+//      console.log(data)
+//      for(const el of data){
+//          const element=document.createElement('div')
+//          element.innerHTML=`${el.activity}`;
+//          wrapper.appendChild(element)
+//      }
+//  }catch (e) {
+//      console.error(e);
+//  }
+// }
+
+
+
+
+
 
 //************************** Event Loop(13)****************************
 //************************** Event Loop****************************

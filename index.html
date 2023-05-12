@@ -6,7 +6,8 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Book app</title>
-    <script src="./app.js"></script>
+    <script src="course/app.js" defer></script>
+    <link rel="stylesheet" href="course/style.css">
 </head>
 <body style="background-color: #1c1b21;">
 <div style="display: flex;justify-content: flex-start;padding-left: 15px;align-items: center;font-size: 55px;
@@ -17,7 +18,7 @@ color:#5c4988; letter-spacing: 10px;opacity: 0.7;border-bottom: 2px solid; borde
     <!--            top: 95px;right: 4px;opacity: 0.3"-->
     <!--         alt="logo">-->
     <div style="height: 50px; position: fixed; z-index: 5;
-          top: 95px;left: -75px;opacity: 0.7">
+          top: 95px;left: -75px;opacity: 0.6">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
              xmlns:svgjs="http://svgjs.dev/svgjs" width='1000px' height="50px" viewBox="0 0 1000 340">
             <g transform="matrix(1,0,0,1,-0.6060606060606233,0.31690759063687324)">
@@ -85,11 +86,27 @@ color:#5c4988; letter-spacing: 10px;opacity: 0.7;border-bottom: 2px solid; borde
             </g>
         </svg>
     </div>
-
-
-
 </div>
-<div class="filter"></div>
+<!--<button class="button" onclick="generate(event)">Generate</button>-->
+<!--<button class="button">Generate</button>-->
+<!--<div class="wrapper"></div>-->
+
+<!--<input type="text" onchange="search(event)">-->
+<!--<div class="wrapper">-->
+<!--&lt;!&ndash;    <div class="inner">&ndash;&gt;-->
+<!--&lt;!&ndash;        <button class="button">Generate</button>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--</div>-->
+
+<div class="wrapper">
+    <div class="inner">
+        <button class="button">First</button>
+        <button class="button">Second</button>
+        <button class="button">Third</button>
+    </div>
+</div>
 
 </body>
 </html>
