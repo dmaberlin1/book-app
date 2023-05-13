@@ -2,9 +2,11 @@
   "name": "book-app",
   "version": "1.0.0",
   "description": "my book-app",
-  "main": "./course/app.js",
+  "main": "course/app1.js",
+  "type": "module",
   "scripts": {
-    "dev": "live-server",
+    "start": "live-server",
+    "build": "rollup -c --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -12,7 +14,10 @@
   ],
   "author": "dmaberlin",
   "license": "ISC",
-  "dependencies": {
-    "axios": "^1.4.0"
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "eslint": "^8.40.0",
+    "rollup": "^3.21.6",
+    "rollup-plugin-import-css": "^3.2.1"
   }
 }
